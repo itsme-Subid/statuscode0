@@ -1,18 +1,17 @@
-"use client";
-
-import React from "react";
-import { useAuth0 } from "@auth0/auth0-react";
-const Home = () => {
-  const { loginWithRedirect,logout, isAuthenticated } = useAuth0();
-  const { user } = useAuth0();
-  return (<div>Home{!isAuthenticated && <button onClick={() => loginWithRedirect()}>Login</button>}
-      {isAuthenticated && user && <button
-        onClick={() =>
-          logout({ logoutParams: { returnTo: window.location.origin } })
-        }
-      > {user.name}
-        Log Out
-      </button>}</div>);
-};
-
-export default Home;
+export default function Home() {
+  return (
+    <main className='flex flex-col items-center'>
+      <h1
+        className='text-9xl font-extrabold mt-8 mb-8'
+        style={{
+          letterSpacing: '-1px',
+          backgroundImage: 'linear-gradient(180deg, #555, #000)',
+          WebkitBackgroundClip: 'text',
+          WebkitTextFillColor: 'transparent'
+        }}
+      >
+        Status Code 0.
+      </h1>
+    </main>
+  )
+}
