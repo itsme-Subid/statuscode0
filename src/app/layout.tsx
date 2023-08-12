@@ -1,9 +1,24 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
 import Provider from "./auth0Provider";
+import { Poppins, Lato, Montserrat } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
+const poppins = Poppins({
+  weight: ["300", "400", "500", "600", "700", "900"],
+  subsets: ["latin"],
+});
+
+const lato = Lato({
+  weight: ["300", "400", "700"],
+  subsets: ["latin"],
+  variable: "--font-lato",
+});
+
+const montserrat = Montserrat({
+  weight: ["300", "400", "500", "600", "700", "900"],
+  subsets: ["latin"],
+  variable: "--font-montserrat",
+});
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -17,7 +32,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+        
+      <body
+        className={`${poppins.className} ${lato.variable} ${montserrat.variable}`}
+      >
         <Provider>{children}</Provider>
       </body>
     </html>
