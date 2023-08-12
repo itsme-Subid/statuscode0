@@ -41,6 +41,7 @@ export default function RootLayout({
           {/* <Navbar /> */}
           {children}
         </Provider>
+        <Toaster />
       </body>
     </html>
   );
