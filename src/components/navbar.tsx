@@ -2,48 +2,38 @@
 
 import Link from "next/link";
 import { useAuth0 } from "@auth0/auth0-react";
+import { HomeIcon } from "lucide-react";
+import { AddIcon, DashboardIcon } from "@/icons";
 
 const Navbar = () => {
-  const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
-  const { user } = useAuth0();
+  const { isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
+  if (isLoading) return null;
   return (
-    <nav className="flex items-center justify-between p-4 border-b-2 border-gray-200">
-      <div>
-        <h1
-          className="text-5xl font-extrabold"
-          style={{
-            letterSpacing: "-1px",
-            backgroundImage: "linear-gradient(180deg, #555, #000)",
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-          }}
-        >
-          <Link href="/">Status Code 0</Link>
-        </h1>
-      </div>
-      <div className="flex space-x-10 items-center">
-        <Link href="/" className="cursor-pointer">
-          Home
-        </Link>
-        <h1 className="cursor-pointer">About</h1>
-        {!isAuthenticated && (
-          <h1
+    <nav className="fixed bottom-4 left-0 right-0">
+      <ul className="px-8 py-4 flex gap-8 w-fit m-auto bg-slate-100 rounded-full">
+        <li className="cursor-pointer" title="Home">
+          <Link href="/">
+            <HomeIcon />
+          </Link>
+        </li>
+        {isAuthenticated ? (
+          <li className="cursor-pointer" title="Dashboard">
+            <Link href="/dashboard">
+              <DashboardIcon />
+            </Link>
+          </li>
+        ) : (
+          <li
+            className="cursor-pointer"
             onClick={() => loginWithRedirect()}
-            className="cursor-pointer bg-blue-500 text-white px-4 py-2 rounded-md"
+            title="Login"
           >
-            Login
-          </h1>
+            <button>
+              <AddIcon />
+            </button>
+          </li>
         )}
-        {isAuthenticated && user && <h1>{user.name}</h1>}
-        {isAuthenticated && (
-          <h1
-            onClick={() => logout()}
-            className="cursor-pointer bg-blue-500 text-white px-4 py-2 rounded-md"
-          >
-            Logout
-          </h1>
-        )}
-      </div>
+      </ul>
     </nav>
   );
 };

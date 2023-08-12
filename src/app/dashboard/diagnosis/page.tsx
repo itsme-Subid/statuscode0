@@ -1,46 +1,48 @@
-import React from 'react';
+"use client";
 
-function Page() {
+import Combobox from "@/components/combobox";
+import Topbar from "@/components/topbar";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { useState } from "react";
+
+const Diagnosis = () => {
+  const [value, setValue] = useState("");
+  const [value1, setValue1] = useState("");
+  const [value2, setValue2] = useState("");
+  const [value3, setValue3] = useState("");
+
   return (
-    <div className="p-4">
-      <h1 className="text-3xl font-bold mb-4">Select your symptoms</h1>
-      <div className="flex flex-wrap -mx-4">
-        <div className="w-1/2 px-4 mb-4">
-          <select className="w-full h-32 text-xl rounded-3xl bg-gray-200 text-gray-600 text-center">
-            <option value="option1">Option 1</option>
-            <option value="option2">Option 2</option>
-            <option value="option3">Option 3</option>
-            <option value="option4">Option 4</option>
-          </select>
+    <>
+      <Topbar title="Disease Diagnosis" />
+      <div className="mt-8 grid grid-cols-2 gap-8">
+        <div className="select-group flex gap-2 flex-col">
+          <Label>First Symptom</Label>
+          <Combobox value={value} setValue={setValue} />
         </div>
-        <div className="w-1/2 px-4 mb-4">
-          <select className="w-full h-32 text-xl rounded-3xl bg-gray-200 text-gray-600 text-center">
-            <option value="option1">Option 1</option>
-            <option value="option2">Option 2</option>
-            <option value="option3">Option 3</option>
-            <option value="option4">Option 4</option>
-          </select>
+        <div className="select-group flex gap-2 flex-col">
+          <Label>Second Symptom</Label>
+          <Combobox value={value1} setValue={setValue1} />
         </div>
-        <div className="w-1/2 px-4 mb-4">
-          <select className="w-full h-32 text-xl rounded-3xl bg-gray-200 text-gray-600 text-center">
-            <option value="option1">Option 1</option>
-            <option value="option2">Option 2</option>
-            <option value="option3">Option 3</option>
-            <option value="option4">Option 4</option>
-          </select>
+        <div className="select-group flex gap-2 flex-col">
+          <Label>Third Symptom</Label>
+          <Combobox value={value2} setValue={setValue2} />
         </div>
-        <div className="w-1/2 px-4 mb-4">
-          <select className="w-full h-32 text-xl rounded-3xl bg-gray-200 text-gray-600 text-center">
-            <option value="option1">Option 1</option>
-            <option value="option2">Option 2</option>
-            <option value="option3">Option 3</option>
-            <option value="option4">Option 4</option>
-          </select>
+        <div className="select-group flex gap-2 flex-col">
+          <Label>Fourth Symptom</Label>
+          <Combobox value={value3} setValue={setValue3} />
         </div>
-        <button className="w-full h-32 text-xl rounded-3xl bg-gray-200 text-gray-600 text-center">Analyze</button>
+        <Button
+          className="ml-auto col-start-2"
+          onClick={() => {
+            console.log([value, value1, value2, value3]);
+          }}
+        >
+          Analyze
+        </Button>
       </div>
-    </div>
+    </>
   );
-}
+};
 
-export default Page;
+export default Diagnosis;
