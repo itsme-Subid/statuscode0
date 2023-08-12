@@ -1,3 +1,4 @@
+import { Toaster } from "@/components/ui/toaster";
 import "./globals.css";
 import type { Metadata } from "next";
 import Provider from "./auth0Provider";
@@ -33,7 +34,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-
       <body
         className={`${poppins.className} ${lato.variable} ${montserrat.variable}`}
       >
