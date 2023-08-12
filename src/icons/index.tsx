@@ -67,6 +67,29 @@ export const StoreIcon = ({
   </svg>
 );
 
+export const StoreAddIcon = ({
+  color = "currentColor",
+  size = "1.5rem",
+  className,
+}: {
+  color?: string;
+  size?: string;
+  className?: string;
+}) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    className={className}
+    viewBox="0 0 24 24"
+  >
+    <path
+      fill={color}
+      d="M20 6H4V4h16v2m-4.31 8H14v1.69c-.63.95-1 2.08-1 3.31c0 .34.04.67.09 1H4v-6H3v-2l1-5h16l1 5v1.35c-.63-.22-1.3-.35-2-.35c-1.23 0-2.36.37-3.31 1M12 14H6v4h6v-4m6.96-2l-.6-3H5.64l-.6 3h13.92M20 18v-3h-2v3h-3v2h3v3h2v-3h3v-2h-3Z"
+    ></path>
+  </svg>
+);
+
 export const BotIcon = ({
   color = "currentColor",
   size = "1.5rem",
@@ -133,5 +156,58 @@ export const DiagnosisIcon = ({
       fill={color}
       d="M16.125 3q2.5 0 4.188 1.85T22 9.25q0 .45-.05.888t-.175.862h-6.25l-1.7-2.55q-.125-.2-.35-.325T13 8q-.325 0-.588.2t-.362.5l-1.35 4.05l-.875-1.3q-.125-.2-.35-.325T9 11H2.225q-.125-.425-.175-.863T2 9.275Q2 6.7 3.675 4.85T7.85 3q1.2 0 2.263.475T12 4.8q.8-.85 1.863-1.325T16.125 3ZM12 21q-.45 0-.863-.163t-.737-.487l-6.7-6.725q-.15-.15-.275-.3T3.175 13H8.45l1.7 2.55q.125.2.35.325t.475.125q.325 0 .6-.2t.375-.5l1.35-4.05l.85 1.3q.15.2.375.325T15 13h5.8l-.25.3l-.25.3l-6.725 6.75q-.325.325-.725.488T12 21Z"
     ></path>
+  </svg>
+);
+
+export const AddIcon = ({
+  color = "currentColor",
+  size = "1.5rem",
+}: {
+  color?: string;
+  size?: string;
+}) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+  >
+    <path fill={color} d="M11 19v-6H5v-2h6V5h2v6h6v2h-6v6h-2Z"></path>
+  </svg>
+);
+
+export const LoaderIcon = ({
+  color = "currentColor",
+  size = "1.5rem",
+  className = "",
+}: {
+  color?: string;
+  size?: string;
+  className?: string;
+}) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    viewBox="0 0 24 24"
+    className={className}
+  >
+    <path
+      fill={color}
+      d="M12,1A11,11,0,1,0,23,12,11,11,0,0,0,12,1Zm0,19a8,8,0,1,1,8-8A8,8,0,0,1,12,20Z"
+      opacity=".25"
+    ></path>
+    <path
+      fill={color}
+      d="M12,4a8,8,0,0,1,7.89,6.7A1.53,1.53,0,0,0,21.38,12h0a1.5,1.5,0,0,0,1.48-1.75,11,11,0,0,0-21.72,0A1.5,1.5,0,0,0,2.62,12h0a1.53,1.53,0,0,0,1.49-1.3A8,8,0,0,1,12,4Z"
+    >
+      <animateTransform
+        attributeName="transform"
+        dur="0.75s"
+        repeatCount="indefinite"
+        type="rotate"
+        values="0 12 12;360 12 12"
+      ></animateTransform>
+    </path>
   </svg>
 );
