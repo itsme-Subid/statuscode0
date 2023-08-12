@@ -38,7 +38,7 @@ export default function RootLayout({
         className={`${poppins.className} ${lato.variable} ${montserrat.variable}`}
       >
         <Provider>
-          <Navbar />
+          {/* <Navbar /> */}
           {children}
         </Provider>
       </body>
