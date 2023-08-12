@@ -3,6 +3,7 @@ import "./globals.css";
 import type { Metadata } from "next";
 import Provider from "./auth0Provider";
 import { Poppins, Lato, Montserrat } from "next/font/google";
+import Navbar from "@/components/Navbar";
 
 const poppins = Poppins({
   weight: ["300", "400", "500", "600", "700", "900"],
@@ -36,8 +37,7 @@ export default function RootLayout({
       <body
         className={`${poppins.className} ${lato.variable} ${montserrat.variable}`}
       >
-        <Provider>{children}</Provider>
-        <Toaster />
+        <Provider><Navbar />{children}</Provider>
       </body>
     </html>
   );

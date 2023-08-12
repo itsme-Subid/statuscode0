@@ -73,4 +73,7 @@
   body {
     @apply bg-background text-foreground;
   }
+
+.child-h-screen > div {
+    height: 100vh;
 }
