@@ -1,10 +1,22 @@
 import "./globals.css";
 import type { Metadata } from "next";
-import { Poppins } from "next/font/google";
+import { Poppins, Lato, Montserrat } from "next/font/google";
 
 const poppins = Poppins({
   weight: ["300", "400", "500", "600", "700", "900"],
   subsets: ["latin"],
+});
+
+const lato = Lato({
+  weight: ["300", "400", "700"],
+  subsets: ["latin"],
+  variable: "--font-lato",
+});
+
+const montserrat = Montserrat({
+  weight: ["300", "400", "500", "600", "700", "900"],
+  subsets: ["latin"],
+  variable: "--font-montserrat",
 });
 
 export const metadata: Metadata = {
@@ -19,7 +31,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={poppins.className}>{children}</body>
+      <body
+        className={`${poppins.className} ${lato.variable} ${montserrat.variable}`}
+      >
+        {children}
+      </body>
     </html>
   );
 }
