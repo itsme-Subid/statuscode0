@@ -37,7 +37,7 @@ function Page() {
           >
             <img
               src={doctor.image}
-              className="h-80 w-96 object-cover"
+              className="w-full aspect-video object-cover"
               alt="image"
             />
             <div className="px-4 flex flex-col gap-2">

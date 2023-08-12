@@ -12,8 +12,10 @@ import {
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import Link from "next/link";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Sidebar = () => {
+  const { logout, isLoading } = useAuth0();
   const [tabs, setTabs] = useState([
     {
       icon: <DashboardIcon />,
@@ -97,21 +99,24 @@ const Sidebar = () => {
               </Link>
             </li>
           ))}
-          <li
-            className="my-4 cursor-pointer select-none"
-            onClick={() => {
-              window.location.href = "/";
-            }}
-          >
-            <button className="flex items-center gap-4">
-              <span className="text-gray-400">
-                <LogoutIcon />
-              </span>
-              <span className="text-sm font-medium tracking-wider text-gray-400">
-                Logout
-              </span>
-            </button>
-          </li>
+          {!isLoading && (
+            <li
+              className="my-4 cursor-pointer select-none"
+              onClick={() => {
+                logout();
+                window.location.href = "/";
+              }}
+            >
+              <button className="flex items-center gap-4">
+                <span className="text-gray-400">
+                  <LogoutIcon />
+                </span>
+                <span className="text-sm font-medium tracking-wider text-gray-400">
+                  Logout
+                </span>
+              </button>
+            </li>
+          )}
           <li className="font-sm mt-auto cursor-pointer font-light text-gray-400">
             Help
           </li>

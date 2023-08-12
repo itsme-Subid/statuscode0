@@ -9,7 +9,7 @@ const Page = () => {
       <div className="mt-8 grid grid-cols-2 gap-10">
         <div className="card">
           <Link
-            href={"/dashboard/news"}
+            href={"/dashboard/video-call"}
             className="inline-block cursor-pointer rounded-3xl border border-transparent bg-[#ddefe0] p-12 py-16 transition-all hover:border-white active:scale-95"
             shallow
           >
@@ -29,7 +29,7 @@ const Page = () => {
         </div>
         <div className="card">
           <Link
-            href={"/dashboard/notification"}
+            href={"/dashboard/store"}
             className="inline-block cursor-pointer rounded-3xl border border-transparent bg-[#f4ecdd] p-12 py-16 transition-all hover:border-white active:scale-95"
             shallow
           >
@@ -49,7 +49,7 @@ const Page = () => {
         </div>
         <div className="card col-span-2">
           <Link
-            href={"/dashboard/experts"}
+            href={"/dashboard/ask-for-help"}
             className="block cursor-pointer rounded-3xl border border-transparent bg-[#efdada] p-12 py-16 transition-all hover:border-white active:scale-95"
             shallow
           >
