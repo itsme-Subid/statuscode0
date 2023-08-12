@@ -1,5 +1,6 @@
 import "./globals.css";
 import type { Metadata } from "next";
+import Provider from "./auth0Provider";
 import { Poppins, Lato, Montserrat } from "next/font/google";
 
 const poppins = Poppins({
@@ -31,10 +32,11 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+        
       <body
         className={`${poppins.className} ${lato.variable} ${montserrat.variable}`}
       >
-        {children}
+        <Provider>{children}</Provider>
       </body>
     </html>
   );
