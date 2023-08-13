@@ -43,7 +43,7 @@ const Doctor = () => {
                 </span>
                 <span
                   className={`opacity-30 ${
-                    request.status === "Accepted"
+                    request.status === "accepted"
                       ? "text-green-500"
                       : "text-red-500"
                   }`}
