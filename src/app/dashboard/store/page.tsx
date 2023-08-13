@@ -1,11 +1,13 @@
-'use client'
-import React from 'react'
+/* eslint-disable @next/next/no-img-element */
+"use client";
+
+import React from "react";
 import { useCollection } from "react-firebase-hooks/firestore";
 import { collection } from "firebase/firestore";
 import { db } from "@/firebase";
 import { LoaderIcon } from "@/icons";
 
-const page = () => {
+const Store = () => {
   const [medicinesRaw, loading] = useCollection(collection(db, "medicines"));
   const medicines = medicinesRaw?.docs.map((doc) => ({
     description: doc.data().description,
@@ -48,7 +50,7 @@ const page = () => {
         )}
       </main>
     </div>
-  )
-}
+  );
+};
 
-export default page;
+export default Store;
