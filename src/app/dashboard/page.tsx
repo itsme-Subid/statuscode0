@@ -21,8 +21,7 @@ const Page = () => {
                 Schedule a Video Call
               </h3>
               <p className="mt-4 font-montserrat text-sm">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Quisquam, voluptatum.
+                Schedule a Video Call with professional doctors, and get your health checked.
               </p>
             </div>
           </Link>
@@ -41,8 +40,7 @@ const Page = () => {
                 Buy Medicines
               </h3>
               <p className="mt-4 font-montserrat text-sm">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Quisquam, voluptatum.
+                Buy medicines from our store, and get them delivered to your doorstep.
               </p>
             </div>
           </Link>
@@ -61,8 +59,7 @@ const Page = () => {
                 Ask for Help
               </h3>
               <p className="mt-4 font-montserrat text-sm">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Quisquam, voluptatum.
+                Ask for help from our bot, and get your health checked.
               </p>
             </div>
           </Link>
