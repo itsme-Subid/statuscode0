@@ -26,6 +26,7 @@
     "cmdk": "^0.2.0",
     "date-fns": "^2.30.0",
     "encoding": "^0.1.13",
+    "eslint-config-next": "^13.4.13",
     "firebase": "^10.1.0",
     "lucide-react": "^0.263.1",
     "next": "^13.4.13",
