@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import { ZegoUIKitPrebuilt } from "@zegocloud/zego-uikit-prebuilt";
+import { useSearchParams } from "next/navigation";
 
 function randomID(len: number) {
   let result = "";
@@ -16,13 +17,9 @@ function randomID(len: number) {
   return result;
 }
 
-export function getUrlParams(url = window.location.href) {
-  let urlStr = url.split("?")[1];
-  return new URLSearchParams(urlStr);
-}
-
 export default function App(): any {
-  const roomID = getUrlParams().get("roomID") || randomID(5);
+  const searchParams = useSearchParams();
+  const roomID = searchParams.get("roomID") || randomID(5);
   let myMeeting = async (element: any) => {
     // generate Kit Token
     const appID = 2102983115;
