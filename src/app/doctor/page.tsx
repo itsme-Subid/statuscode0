@@ -1,4 +1,5 @@
 "use client";
+
 import React from "react";
 import UpdateProfile from "@/components/dialog/updateDocterProfile";
 import Topbar from "@/components/topbar";
@@ -36,52 +37,54 @@ const Doctor = () => {
   return (
     <>
       <Topbar title="Requests" components={[UpdateProfile]} />
-      <ul className="mt-8 grid grid-cols-1 gap-10">
-        {requests?.map((request) => (
-          <li
-            key={request.id}
-            className="flex flex-col gap-4 p-4 bg-white rounded-3xl overflow-hidden"
-          >
-            <div className="px-4 flex justify-between gap-2">
-              <div className="flex">
-                <div className="flex flex-col gap-2">
-                  <p className="text-lg font-semibold">
-                    {request.name} -{" "}
-                    {new Date(request.date).toLocaleDateString()}
-                  </p>
-                  <p className="text-sm text-gray-500">{request.userId}</p>
+      {/* <main className="mt-8 flex flex-col gap-4 rounded-lg bg-white">
+        {!loading ? (
+          <ul className="border-between flex flex-col"></ul> */}
+      <main className="mt-8 flex flex-col gap-4 rounded-3xl bg-white">
+        <ul className="border-between flex flex-col">
+          {requests?.map((request) => (
+            <li key={request.id} className="flex flex-col gap-4 p-4">
+              <div className="px-4 flex justify-between gap-2">
+                <div className="flex">
+                  <div className="flex flex-col gap-2">
+                    <p className="text-lg font-semibold">
+                      {request.name} -{" "}
+                      {new Date(request.date).toLocaleDateString()}
+                    </p>
+                    <p className="text-sm text-gray-500">{request.userId}</p>
+                  </div>
                 </div>
+                {!accepted && request.status !== "accepted" ? (
+                  <div className="flex gap-4 mr-14">
+                    <button
+                      onClick={() => {
+                        acceptRequest(request.id);
+                        setAccepted(true);
+                      }}
+                      className="bg-green-500/30 aspect-square grid place-content-center rounded-full"
+                    >
+                      <CheckIcon />
+                    </button>
+                    <button
+                      onClick={() => rejectRequest(request.id)}
+                      className="bg-red-500/30 aspect-square grid place-content-center rounded-full"
+                    >
+                      <CrossIcon />
+                    </button>
+                  </div>
+                ) : (
+                  <Link
+                    href={``}
+                    className="flex items-center py-2 px-6 rounded-full bg-blue-800 text-white"
+                  >
+                    Join Video Call
+                  </Link>
+                )}
               </div>
-              {!accepted && request.status !== "accepted" ? (
-                <div className="flex gap-4 mr-14">
-                  <button
-                    onClick={() => {
-                      acceptRequest(request.id);
-                      setAccepted(true);
-                    }}
-                    className="bg-green-500/30 aspect-square grid place-content-center rounded-full"
-                  >
-                    <CheckIcon />
-                  </button>
-                  <button
-                    onClick={() => rejectRequest(request.id)}
-                    className="bg-red-500/30 aspect-square grid place-content-center rounded-full"
-                  >
-                    <CrossIcon />
-                  </button>
-                </div>
-              ) : (
-                <Link
-                  href={``}
-                  className="flex items-center py-2 px-6 rounded-full bg-blue-800 text-white"
-                >
-                  Join Video Call
-                </Link>
-              )}
-            </div>
-          </li>
-        ))}
-      </ul>
+            </li>
+          ))}
+        </ul>
+      </main>
     </>
   );
 };

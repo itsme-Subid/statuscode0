@@ -79,6 +79,10 @@
     height: 100vh;
   }
 
+  .border-between>*:not(:last-child) {
+    @apply border-b;
+  }
+
   .custom-text {
     background-image: linear-gradient(90deg,
         hsl(var(--primary)) 0%,
