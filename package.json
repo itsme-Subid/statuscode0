@@ -17,6 +17,7 @@
     "@radix-ui/react-select": "^1.2.2",
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-toast": "^1.1.4",
+    "@zegocloud/zego-uikit-prebuilt": "^1.8.10",
     "agora-react-uikit": "^1.2.0",
     "autoprefixer": "^10.4.14",
     "axios": "^1.4.0",

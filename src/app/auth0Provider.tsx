@@ -8,7 +8,7 @@ const Provider = ({ children }: { children: React.ReactNode }) => {
       domain="dev-3vjmx0uqjuzh5578.us.auth0.com"
       clientId="NYRtaUmeADSFvbwN5Rso1Ang9TVIICob"
       authorizationParams={{
-        redirect_uri: "http://localhost:3000",
+        redirect_uri: "http://localhost:3000/role-ask",
       }}
     >
       {children}

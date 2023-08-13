@@ -14,20 +14,47 @@ import {
 import { Label } from "@/components/ui/label";
 import { LoaderIcon } from "@/icons";
 import { FormEvent, useState } from "react";
+import { addDoc, collection } from "firebase/firestore";
 import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { cn } from "@/lib/utils";
 import { format } from "date-fns";
 import { CalendarIcon } from "lucide-react";
 import { Calendar } from "../ui/calendar";
+import { db } from "@/firebase";
+import { useToast } from "@/components/ui/use-toast";
 
-const RequestMeet = () => {
+const RequestMeet = ({id}: {id: string}) => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const {toast} = useToast();
   const [date, setDate] = useState<Date>();
   const handleMedicine = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(date?.getTime());
+    setLoading(true);
+    const request = {
+      date: date?.getTime(),
+      docterId: id,
+      status: "pending",
+    };
+    try {
+      await addDoc(collection(db, "requests"), request);
+      toast({
+        title: "Success",
+        description: "Request sent successfully",
+      });
+    } catch (error) {
+      console.log(error);
+      toast({
+        variant: "destructive",
+        title: "Error",
+        description: "Please Provide a Date!",
+      });
+    }
+
+    setLoading(false);
+    setOpen(false);
   };
+
   return (
     <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>

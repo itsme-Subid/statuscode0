@@ -55,7 +55,7 @@ function Page() {
                   {doctor.fees}
                 </span>
               </p>
-              <RequestMeet />
+              <RequestMeet id={doctor.id}/>
             </div>
           </li>
         ))}
