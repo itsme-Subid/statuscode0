@@ -36,12 +36,6 @@ const Sidebar = () => {
       link: "/dashboard/video-call",
     },
     {
-      icon: <BotIcon />,
-      title: "Ask for Help",
-      active: false,
-      link: "/dashboard/ask-for-help",
-    },
-    {
       icon: <DiagnosisIcon />,
       title: "Diagnosis",
       active: false,

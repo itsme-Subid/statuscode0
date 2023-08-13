@@ -33,7 +33,8 @@ export const formSchema = zod.object({
   speciality: zod.string().nonempty(),
   address: zod.string().nonempty(),
   phone: zod.string().nonempty(),
-  fees: zod.string(),
+  fees: zod.string().nonempty(),
+  time: zod.string().nonempty(),
 });
 
 export type FormValues = zod.infer<typeof formSchema>;
@@ -215,6 +216,18 @@ const UpdateProfile = () => {
                 className="col-span-3"
                 {...register("phone")}
                 title={errors.phone?.message}
+              />
+            </div>
+            <div className="mb-4 grid grid-cols-4 items-center gap-4">
+              <Label htmlFor="name" className="text-right">
+                Time
+              </Label>
+              <Input
+                id="name"
+                placeholder="2000"
+                className="col-span-3"
+                {...register("time")}
+                title={errors.time?.message}
               />
             </div>
             <div className="mb-4 grid grid-cols-4 items-center gap-4">

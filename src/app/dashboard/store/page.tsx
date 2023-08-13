@@ -5,8 +5,11 @@ import { useCollection } from "react-firebase-hooks/firestore";
 import { collection } from "firebase/firestore";
 import { db } from "@/firebase";
 import { LoaderIcon } from "@/icons";
+import { useToast } from "@/components/ui/use-toast";
+import Topbar from "@/components/topbar";
 
 const Store = () => {
+  const { toast } = useToast();
   const [medicinesRaw, loading] = useCollection(collection(db, "medicines"));
   const medicines = medicinesRaw?.docs.map((doc) => ({
     description: doc.data().description,
@@ -16,7 +19,8 @@ const Store = () => {
     id: doc.id,
   }));
   return (
-    <div>
+    <>
+      <Topbar title="Buy medicine" />
       <main className="mt-8 flex flex-col gap-4">
         {!loading ? (
           <ul className="border-between flex gap-8">
@@ -31,12 +35,18 @@ const Store = () => {
                   <div className="px-4 flex flex-col gap-4">
                     <p className="font-bold text-2xl">{medicine.name}</p>
                     <p>{medicine.description}</p>
-                    <p className="bg-black text-white rounded-md px-4 py-2">
-                      Price : {medicine.price}
-                    </p>
-                    <p className="text-center cursor-pointer bg-green-500 hover:bg-green-600 text-white rounded-md px-4 py-2">
+                    <p>₹ {medicine.price}</p>
+                    <button
+                      onClick={() =>
+                        toast({
+                          title: "Coming Soon",
+                          description: "This feature is coming soon",
+                        })
+                      }
+                      className="text-center cursor-pointer bg-black hover:bg-black/80 text-white rounded-md px-4 py-2"
+                    >
                       Buy now
-                    </p>
+                    </button>
                   </div>
                 </div>
               </li>
@@ -48,7 +58,7 @@ const Store = () => {
           </div>
         )}
       </main>
-    </div>
+    </>
   );
 };
 

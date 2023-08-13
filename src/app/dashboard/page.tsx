@@ -1,5 +1,5 @@
 import Topbar from "@/components/topbar";
-import { BotIcon, StoreIcon, VideoCallIcon } from "@/icons";
+import { DiagnosisIcon, StoreIcon, VideoCallIcon } from "@/icons";
 import Link from "next/link";
 
 const Page = () => (
@@ -48,15 +48,17 @@ const Page = () => (
       </div>
       <div className="card col-span-2">
         <Link
-          href={"/dashboard/ask-for-help"}
+          href={"/dashboard/diagnosis"}
           className="block cursor-pointer rounded-3xl border border-transparent bg-[#efdada] p-12 py-16 transition-all hover:border-white active:scale-95"
           shallow
         >
           <div className="icon mb-8 ml-auto">
-            <BotIcon size="2.5rem" />
+            <DiagnosisIcon size="2.5rem" />
           </div>
           <div className="content">
-            <h3 className="font-montserrat text-2xl font-bold">Ask for Help</h3>
+            <h3 className="font-montserrat text-2xl font-bold">
+              Ask for Diagnosis
+            </h3>
             <p className="mt-4 font-montserrat text-sm">
               Ask for help from our bot, and get your health checked.
             </p>
