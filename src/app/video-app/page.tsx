@@ -1,8 +1,6 @@
 "use client";
-
 import * as React from "react";
 import { ZegoUIKitPrebuilt } from "@zegocloud/zego-uikit-prebuilt";
-import { useSearchParams } from "next/navigation";
 
 function randomID(len) {
   let result = "";
@@ -17,9 +15,13 @@ function randomID(len) {
   return result;
 }
 
-export default function App() {
-  const searchParams = useSearchParams();
-  const roomID = searchParams.get("roomID") || randomID(5);
+export function getUrlParams(url = window.location.href) {
+  let urlStr = url.split("?")[1];
+  return new URLSearchParams(urlStr);
+}
+
+export default function App(): any {
+  const roomID = getUrlParams().get("roomID") || randomID(5);
   let myMeeting = async (element) => {
     // generate Kit Token
     const appID = 2102983115;
@@ -36,7 +38,7 @@ export default function App() {
     const zp = ZegoUIKitPrebuilt.create(kitToken);
     // start the call
     zp.joinRoom({
-      container,
+      container: element,
       sharedLinks: [
         {
           name: "Personal link",
