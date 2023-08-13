@@ -1,3 +1,5 @@
+"use client";
+
 export const getCookie = (name: string) => {
   const cookie = document.cookie
     .split("; ")
