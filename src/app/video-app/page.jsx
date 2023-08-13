@@ -4,7 +4,7 @@ import * as React from "react";
 import { ZegoUIKitPrebuilt } from "@zegocloud/zego-uikit-prebuilt";
 import { useSearchParams } from "next/navigation";
 
-function randomID(len: number) {
+function randomID(len) {
   let result = "";
   if (result) return result;
   var chars = "12345qwertyuiopasdfgh67890jklmnbvcxzMNBVCZXASDQWERTYHGFUIOLKJP",
@@ -17,10 +17,10 @@ function randomID(len: number) {
   return result;
 }
 
-export default function App(): any {
+export default function App() {
   const searchParams = useSearchParams();
   const roomID = searchParams.get("roomID") || randomID(5);
-  let myMeeting = async (element: any) => {
+  let myMeeting = async (element) => {
     // generate Kit Token
     const appID = 2102983115;
     const serverSecret = "da78e53c3c42cc1ef87d0f09c4a463fd";
@@ -36,7 +36,7 @@ export default function App(): any {
     const zp = ZegoUIKitPrebuilt.create(kitToken);
     // start the call
     zp.joinRoom({
-      container: element,
+      container,
       sharedLinks: [
         {
           name: "Personal link",
@@ -52,7 +52,7 @@ export default function App(): any {
       scenario: {
         mode: ZegoUIKitPrebuilt.VideoConference,
       },
-    } as any);
+    });
   };
 
   return (
