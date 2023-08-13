@@ -25,6 +25,7 @@ import { useUploadFile } from "react-firebase-hooks/storage";
 import { getDownloadURL, ref as storageRef } from "firebase/storage";
 import { v4 as uuid } from "uuid";
 import { Input } from "@/components/ui/input";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export const formSchema = zod.object({
   name: zod.string().nonempty({ message: "Name is required" }),
@@ -36,6 +37,7 @@ export type FormValues = zod.infer<typeof formSchema>;
 
 const AddMedicine = () => {
   const [open, setOpen] = useState(false);
+  const { user, isLoading } = useAuth0();
   const [loading, setLoading] = useState(false);
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [uploadFile] = useUploadFile();
@@ -67,6 +69,7 @@ const AddMedicine = () => {
       const medicine = {
         ...data,
         image: url,
+        sellerId: user?.email,
       };
       await addDoc(collection(db, "medicines"), medicine);
       toast({
@@ -185,7 +188,7 @@ const AddMedicine = () => {
           </div>
           <Dropzone onDrop={handleDrop} />
           <DialogFooter>
-            <Button type="submit" disabled={loading}>
+            <Button type="submit" disabled={loading || isLoading}>
               {loading && <LoaderIcon className="mr-2" />}
               <span>Add Medicine</span>
             </Button>

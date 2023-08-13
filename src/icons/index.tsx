@@ -258,3 +258,51 @@ export const HomeIcon = ({
     ></path>
   </svg>
 );
+
+export const CheckIcon = ({
+  color = "currentColor",
+  size = "1.5rem",
+  className = "",
+}: {
+  color?: string;
+  size?: string;
+  className?: string;
+}) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    className={className}
+    viewBox="0 0 24 24"
+  >
+    <path
+      fill={color}
+      d="m10 13.6l5.9-5.9q.275-.275.7-.275t.7.275q.275.275.275.7t-.275.7l-6.6 6.6q-.3.3-.7.3t-.7-.3l-2.6-2.6q-.275-.275-.275-.7t.275-.7q.275-.275.7-.275t.7.275l1.9 1.9Z"
+    ></path>
+  </svg>
+);
+
+export const CrossIcon = ({
+  color = "currentColor",
+  size = "1.5rem",
+  className = "",
+}: {
+  color?: string;
+  size?: string;
+  className?: string;
+}) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={size}
+    height={size}
+    className={className}
+    viewBox="0 0 15 15"
+  >
+    <path
+      fill={color}
+      fillRule="evenodd"
+      d="M11.782 4.032a.575.575 0 1 0-.813-.814L7.5 6.687L4.032 3.218a.575.575 0 0 0-.814.814L6.687 7.5l-3.469 3.468a.575.575 0 0 0 .814.814L7.5 8.313l3.469 3.469a.575.575 0 0 0 .813-.814L8.313 7.5l3.469-3.468Z"
+      clipRule="evenodd"
+    ></path>
+  </svg>
+);

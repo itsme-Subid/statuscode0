@@ -21,21 +21,22 @@ const Seller = () => {
       <Topbar title="My Store" components={[AddMedicine]} />
       <main className="mt-8 flex flex-col gap-4">
         {!loading ? (
-          <ul className="border-between flex gap-8">
-            {medicines?.map((medicine: any) => (
-              <li key={medicine.id} className="w-96 bg-white rounded-xl">
+          <ul className="border-between grid grid-cols-3 gap-8">
+            {medicines?.map((medicine) => (
+              <li
+                key={medicine.id}
+                className="bg-white rounded-3xl overflow-hidden"
+              >
                 <div className="flex flex-col gap-8 pb-4">
                   <img
                     src={medicine.image}
-                    className="w-full aspect-video object-cover rounded-t-xl"
+                    className="w-full aspect-video object-cover"
                     alt="image"
                   />
                   <div className="px-4 flex flex-col gap-4">
+                    <p className="text-2xl font-semibold">₹ {medicine.price}</p>
                     <p className="font-bold text-2xl">{medicine.name}</p>
-                    <p>{medicine.description}</p>
-                    <p className="bg-black hover:bg-zinc-800 text-white rounded-md px-4 py-2">
-                      Price : {medicine.price}
-                    </p>
+                    <p className="line-clamp-1">{medicine.description}</p>
                   </div>
                 </div>
               </li>
