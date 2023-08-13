@@ -1,8 +1,8 @@
 "use client";
 
+import { getCookie } from "@/components/getCookie";
 import Sidebar from "@/components/sidebar";
 import { useAuth0 } from "@auth0/auth0-react";
-import { getCookie } from "./page";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const { logout } = useAuth0();
