@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { useCollection } from "react-firebase-hooks/firestore";
@@ -5,8 +6,11 @@ import { collection } from "firebase/firestore";
 import { db } from "@/firebase";
 import Topbar from "@/components/topbar";
 import RequestMeet from "@/components/dialog/requestMeet";
+import { useAuth0 } from "@auth0/auth0-react";
+import Link from "next/link";
 
-function Page() {
+const Page = () => {
+  const { user } = useAuth0();
   const [doctorsRaw, loading] = useCollection(collection(db, "doctors"));
   const [requestsRaw, loading2] = useCollection(collection(db, "requests"));
   const doctors = doctorsRaw?.docs.map((doc) => ({
@@ -28,44 +32,48 @@ function Page() {
       name: doc.data().name,
       id: doc.id,
     }))
+    .filter((request) => request.userId === user?.email);
   return (
     <>
       <Topbar title="Schedule a Meeting" />
-      <div className="grid grid-cols-2">
-      <ul className="mt-8 grid grid-cols-1 gap-10">
-        {doctors?.map((doctor) => (
-          <li
-            key={doctor.id}
-            className="flex flex-col gap-4 pb-4 bg-white rounded-3xl overflow-hidden"
-          >
-            <img
-              src={doctor.image}
-              className="w-full aspect-video object-cover"
-              alt="image"
-            />
-            <div className="px-4 flex flex-col gap-2">
-              <h3 className="flex justify-between items-center">
-                <span className="text-2xl font-bold">{doctor.name}</span>
-                <span className="opacity-30">{doctor.degree}</span>
-              </h3>
-              <p className="flex justify-between">
-                <span>{doctor.address}</span>
-                <span>{doctor.phone}</span>
-              </p>
-              <p className="flex justify-between items-center">
-                <span>{doctor.time}</span>
-                <span className="text-2xl font-medium w-fit">
-                  Fees/-{doctor.fees}
-                </span>
-              </p>
-              <RequestMeet id={doctor.id}/>
-            </div>
-          </li>
-        ))}
-      </ul>
-      <div>
-        <h1 className="text-2xl font-bold text-center mt-8">Your Requests</h1>
-          <ul className="mt-8 grid grid-cols-1 gap-10">
+      <div className="grid grid-cols-2 gap-8">
+        <ul className="mt-8 grid grid-cols-1 gap-10">
+          {doctors?.map((doctor) => (
+            <li
+              key={doctor.id}
+              className="flex flex-col gap-4 pb-4 bg-white rounded-3xl overflow-hidden"
+            >
+              <img
+                src={doctor.image}
+                className="w-full aspect-video object-cover"
+                alt="image"
+              />
+              <div className="px-4 flex flex-col gap-2">
+                <h3 className="flex justify-between items-center">
+                  <span className="text-2xl font-bold">{doctor.name}</span>
+                  <span className="opacity-30">{doctor.degree}</span>
+                </h3>
+                <p className="flex justify-between">
+                  <span>{doctor.address}</span>
+                  <span>{doctor.phone}</span>
+                </p>
+                <p className="flex justify-between items-center">
+                  <span>{doctor.time}</span>
+                  <span className="text-2xl font-medium w-fit">
+                    <span className="text-lg">Fees/-</span>
+                    {doctor.fees}
+                  </span>
+                </p>
+                <RequestMeet id={doctor.id} />
+              </div>
+            </li>
+          ))}
+        </ul>
+        <div>
+          <h1 className="text-2xl font-bold text-center mt-8 absolute -top-5">
+            Your Requests
+          </h1>
+          <ul className="mt-8 grid grid-cols-1 gap-4">
             {requests?.map((request) => (
               <li
                 key={request.id}
@@ -83,33 +91,30 @@ function Page() {
                   </div>
                   {request.status === "accepted" ? (
                     <div className="flex gap-4 mr-14">
-                      <button
-                        className="bg-green-500/30 aspect-square grid place-content-center rounded-full"
+                      <Link
+                        href={`/video-app`}
+                        className="bg-green-500/30 aspect-video grid place-content-center rounded-full"
+                        shallow
                       >
                         Join
-                      </button>
+                      </Link>
                     </div>
                   ) : request.status === "rejected" ? (
                     <div className="flex gap-4 mr-14">
                       Rejected
-                      <button
-                        className="bg-red-500/30 aspect-square grid place-content-center rounded-full"
-                      >
-                      </button>
+                      <button className="bg-red-500/30 aspect-video grid place-content-center rounded-full"></button>
                     </div>
                   ) : (
-                    <div className="flex gap-4 mr-14 place-content-center">
-                      Pending
-                    </div>
+                    <div className="self-center">Pending</div>
                   )}
                 </div>
               </li>
             ))}
           </ul>
-      </div>
+        </div>
       </div>
     </>
   );
-}
+};
 
 export default Page;
