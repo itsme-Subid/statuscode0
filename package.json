@@ -20,6 +20,7 @@
     "@zegocloud/zego-uikit-prebuilt": "^1.8.10",
     "agora-react-uikit": "^1.2.0",
     "autoprefixer": "^10.4.14",
+    "axios": "^1.4.0",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "cmdk": "^0.2.0",

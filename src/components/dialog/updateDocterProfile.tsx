@@ -25,7 +25,7 @@ import Dropzone from "@/components/dropzone";
 import { useUploadFile } from "react-firebase-hooks/storage";
 import { getDownloadURL, ref as storageRef } from "firebase/storage";
 import { v4 as uuid } from "uuid";
-import { useDocument } from "react-firebase-hooks/firestore";
+import { useAuth0 } from "@auth0/auth0-react";
 
 export const formSchema = zod.object({
   name: zod.string().nonempty(),
@@ -41,9 +41,9 @@ export type FormValues = zod.infer<typeof formSchema>;
 const UpdateProfile = () => {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
+  const { user, isLoading } = useAuth0();
   const [selectedImage, setSelectedImage] = useState<File | null>(null);
   const [uploadFile] = useUploadFile();
-  const [value] = useDocument(doc(db, "doctors", localStorage.getItem("uid")!));
   const {
     register,
     handleSubmit,
@@ -71,8 +71,17 @@ const UpdateProfile = () => {
       const profile = {
         ...data,
         image: url,
+        doctorId: user?.email,
       };
-      await addDoc(collection(db, "doctors"), profile);
+      if (localStorage.getItem("doctorId")) {
+        await updateDoc(
+          doc(db, "doctors", localStorage.getItem("doctorId")!),
+          profile
+        );
+      } else {
+        const data = await addDoc(collection(db, "doctors"), profile);
+        localStorage.setItem("doctorId", data.id);
+      }
       toast({
         title: "Profile Updated",
         description: "Profile has been updated successfully",
@@ -125,7 +134,6 @@ const UpdateProfile = () => {
           <img
             className="h-10 w-10 rounded-full object-cover"
             src={
-              value?.data()?.image ||
               "https://cdn3.iconfinder.com/data/icons/avatars-round-flat/33/avat-01-512.png"
             }
             alt=""
@@ -147,7 +155,7 @@ const UpdateProfile = () => {
               </Label>
               <Input
                 id="name"
-                defaultValue={value?.data()?.name || ""}
+                defaultValue={""}
                 placeholder="John Doe"
                 className="col-span-3"
                 {...register("name")}
@@ -160,7 +168,7 @@ const UpdateProfile = () => {
               </Label>
               <Input
                 id="name"
-                defaultValue={value?.data()?.speciality || ""}
+                defaultValue={""}
                 placeholder="Dentist"
                 className="col-span-3"
                 {...register("speciality")}
@@ -173,7 +181,7 @@ const UpdateProfile = () => {
               </Label>
               <Input
                 id="name"
-                defaultValue={value?.data()?.degree || ""}
+                defaultValue={""}
                 placeholder="MBBS"
                 className="col-span-3"
                 {...register("degree")}
@@ -189,7 +197,7 @@ const UpdateProfile = () => {
               </Label>
               <Input
                 id="name"
-                defaultValue={value?.data()?.address || ""}
+                defaultValue={""}
                 placeholder="123, Street, City, Country"
                 className="col-span-3"
                 {...register("address")}
@@ -202,7 +210,7 @@ const UpdateProfile = () => {
               </Label>
               <Input
                 id="name"
-                defaultValue={value?.data()?.phone || ""}
+                defaultValue={""}
                 placeholder="+91 1234567890"
                 className="col-span-3"
                 {...register("phone")}
@@ -215,24 +223,20 @@ const UpdateProfile = () => {
               </Label>
               <Input
                 id="name"
-                defaultValue={value?.data()?.fees}
                 placeholder="2000"
                 className="col-span-3"
                 {...register("fees")}
                 title={errors.fees?.message}
               />
             </div>
-            {(selectedImage || !!value?.data()?.image) && (
+            {selectedImage && (
               <div className="mb-4 grid grid-cols-4 items-center gap-4">
                 <Label htmlFor="name" className="text-right">
                   Profile pic
                 </Label>
                 <div className="col-span-3">
                   <img
-                    src={
-                      (selectedImage && URL.createObjectURL(selectedImage)) ||
-                      value?.data()?.image
-                    }
+                    src={selectedImage && URL.createObjectURL(selectedImage)}
                     alt="preview"
                     className="aspect-video max-w-xs rounded-lg object-cover"
                   />
@@ -242,7 +246,7 @@ const UpdateProfile = () => {
           </div>
           <Dropzone onDrop={handleDrop} />
           <DialogFooter>
-            <Button type="submit" disabled={loading}>
+            <Button type="submit" disabled={loading || isLoading}>
               {loading && <LoaderIcon className="mr-2" />}
               <span>Apply Changes</span>
             </Button>

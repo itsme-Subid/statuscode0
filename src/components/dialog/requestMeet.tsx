@@ -22,19 +22,23 @@ import { CalendarIcon } from "lucide-react";
 import { Calendar } from "../ui/calendar";
 import { db } from "@/firebase";
 import { useToast } from "@/components/ui/use-toast";
+import { useAuth0 } from "@auth0/auth0-react";
 
-const RequestMeet = ({id}: {id: string}) => {
+const RequestMeet = ({ id }: { id: string }) => {
+  const { user, isLoading } = useAuth0();
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
-  const {toast} = useToast();
+  const { toast } = useToast();
   const [date, setDate] = useState<Date>();
   const handleMedicine = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
     const request = {
       date: date?.getTime(),
-      docterId: id,
+      doctorId: id,
       status: "pending",
+      userId: user?.email,
+      name: user?.name,
     };
     try {
       await addDoc(collection(db, "requests"), request);
@@ -105,7 +109,7 @@ const RequestMeet = ({id}: {id: string}) => {
             </div>
           </div>
           <DialogFooter>
-            <Button type="submit" disabled={loading}>
+            <Button type="submit" disabled={loading || isLoading}>
               {loading && <LoaderIcon className="mr-2" />}
               <span>Schedule Meet</span>
             </Button>
