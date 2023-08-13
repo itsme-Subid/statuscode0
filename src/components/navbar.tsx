@@ -6,8 +6,7 @@ import { HomeIcon } from "lucide-react";
 import { AddIcon, DashboardIcon } from "@/icons";
 
 const Navbar = () => {
-  const { isAuthenticated, isLoading, loginWithRedirect } = useAuth0();
-  if (isLoading) return null;
+  const { isAuthenticated, loginWithRedirect } = useAuth0();
   return (
     <nav className="fixed bottom-4 left-0 right-0">
       <ul className="px-8 py-4 flex gap-8 w-fit m-auto bg-slate-100 rounded-full">
