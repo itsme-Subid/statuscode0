@@ -23,10 +23,18 @@ const Doctor = () => {
     .filter((request) => request.doctorId === localStorage.getItem("doctorId"));
 
   const [accepted, setAccepted] = React.useState<Boolean>(false);
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+let roomId = '';
+for (let i = 0; i < 4; i++) {
+  const randomIndex = Math.floor(Math.random() * characters.length);
+  roomId += characters[randomIndex];
+}
+
 
   const acceptRequest = async (id: string) => {
     await updateDoc(doc(db, "requests", id), {
       status: "accepted",
+      roomId: roomId
     });
   };
 
