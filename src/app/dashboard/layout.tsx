@@ -2,6 +2,7 @@
 
 import Sidebar from "@/components/sidebar";
 import { useAuth0 } from "@auth0/auth0-react";
+import { getCookie } from "./page";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const { logout } = useAuth0();
@@ -18,10 +19,3 @@ const Layout = ({ children }: { children: React.ReactNode }) => {
 };
 
 export default Layout;
-
-export const getCookie = (name: string) => {
-  const cookie = document.cookie
-    .split("; ")
-    .find((row) => row.startsWith(name));
-  return cookie ? cookie.split("=")[1] : null;
-};

@@ -21,7 +21,8 @@ const Page = () => {
                 Schedule a Video Call
               </h3>
               <p className="mt-4 font-montserrat text-sm">
-                Schedule a Video Call with professional doctors, and get your health checked.
+                Schedule a Video Call with professional doctors, and get your
+                health checked.
               </p>
             </div>
           </Link>
@@ -40,7 +41,8 @@ const Page = () => {
                 Buy Medicines
               </h3>
               <p className="mt-4 font-montserrat text-sm">
-                Buy medicines from our store, and get them delivered to your doorstep.
+                Buy medicines from our store, and get them delivered to your
+                doorstep.
               </p>
             </div>
           </Link>
@@ -70,3 +72,10 @@ const Page = () => {
 };
 
 export default Page;
+
+export const getCookie = (name: string) => {
+  const cookie = document.cookie
+    .split("; ")
+    .find((row) => row.startsWith(name));
+  return cookie ? cookie.split("=")[1] : null;
+};

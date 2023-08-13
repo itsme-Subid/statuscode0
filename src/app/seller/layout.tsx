@@ -2,7 +2,7 @@
 
 import Sidebar from "@/components/sidebarSeller";
 import { useAuth0 } from "@auth0/auth0-react";
-import { getCookie } from "../dashboard/layout";
+import { getCookie } from "../dashboard/page";
 
 const Layout = ({ children }: { children: React.ReactNode }) => {
   const { logout } = useAuth0();
